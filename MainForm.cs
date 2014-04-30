@@ -113,8 +113,12 @@ namespace Kalibrator
 
             if (_logFiles != null)
             {
-                IProcessor processor = new MAFCalibrationProcessor();
-                processor.Process(_logFiles);
+                FormData data = GetFormData();
+
+                IProcessor processor = new MafCalibrationProcessor();                
+                OutputData outputData = processor.Process(data, _logFiles);
+
+                DisplayOutput(outputData);
             }
 
             profiler.LogElapsed("Processing");
@@ -126,6 +130,64 @@ namespace Kalibrator
         #endregion
 
         #region Form Methods and Delegates
+
+        private FormData GetFormData()
+        {
+            FormData data = new FormData();
+
+            try
+            {
+                data.OpenLoopAPP = Convert.ToInt32(tbAcceleratorPosition.Text);
+                data.OpenLoopLoad = Convert.ToSingle(tbLoad.Text);
+                
+                System.Collections.Specialized.StringCollection mafBreakpoints = Properties.Settings.Default.MafBreakpoints;
+                List<string> mafValues = tbCurrentMAFCalibration.Text.Split('\t').ToList();
+
+                // Check to make sure we have enough maf values for our breakpoints
+                if (mafBreakpoints.Count == mafValues.Count)
+                {
+                    data.MafValues = new Dictionary<float,float>();
+                    for (int i = 0; i < mafBreakpoints.Count; i++)
+                    {
+                        data.MafValues.Add(Convert.ToSingle(mafBreakpoints[i]), Convert.ToSingle(mafValues[i]));
+                    }
+                }
+
+                System.Collections.Specialized.StringCollection wotAfrBreakpoints = Properties.Settings.Default.WotAfrBreakpoints;
+                List<string> wotAfrValues = tbAFRTargets.Text.Split('\t').ToList();
+
+                // Check to make sure we have enough wot afr values for our breakpoints
+                if (wotAfrBreakpoints.Count == wotAfrValues.Count)
+                {
+                    data.WotAFRValues = new Dictionary<float, float>();
+                    for (int i = 0; i < wotAfrBreakpoints.Count; i++)
+                    {
+                        data.WotAFRValues.Add(Convert.ToSingle(wotAfrBreakpoints[i]), Convert.ToSingle(wotAfrValues[i]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                data = null;
+            }
+
+            return data;
+        }
+
+        private delegate void DisplayOutputDelegate(OutputData data);
+
+        private void DisplayOutput(OutputData data)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new DisplayOutputDelegate(DisplayOutput), data);
+            }
+            else
+            {
+                tbProcessingOutput.Text = data.GetDisplayedOutput();
+            }
+        }
 
         private delegate void AddDelegate(string filename);
 
@@ -155,6 +217,7 @@ namespace Kalibrator
                 gbLogFile.Enabled = true;
                 gbCurrentMAFCalibration.Enabled = true;
                 gbAFRTargets.Enabled = true;
+                gbProcessingOutput.Enabled = true;
                 btnProcess.Enabled = true;
                 Application.DoEvents();
             }
@@ -172,6 +235,7 @@ namespace Kalibrator
                 gbLogFile.Enabled = false;
                 gbCurrentMAFCalibration.Enabled = false;
                 gbAFRTargets.Enabled = false;
+                gbProcessingOutput.Enabled = false;
                 btnProcess.Enabled = false;
                 Application.DoEvents();
             }

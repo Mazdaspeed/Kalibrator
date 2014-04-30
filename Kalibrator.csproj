@@ -69,16 +69,19 @@
     <Compile Include="Data\Elements\TimeElement.cs" />
     <Compile Include="Data\Elements\VehicleSpeedElement.cs" />
     <Compile Include="Data\Elements\WGDCElement.cs" />
+    <Compile Include="Data\FormData.cs" />
     <Compile Include="Data\LogEntry.cs" />
     <Compile Include="Data\LogFile.cs" />
+    <Compile Include="Data\MafCalibration.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\OutputData.cs" />
     <Compile Include="Processors\IProcessor.cs" />
-    <Compile Include="Processors\MAFCalibrationProcessor.cs" />
+    <Compile Include="Processors\MafCalibrationProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\TickProfiler.cs" />
@@ -94,6 +97,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

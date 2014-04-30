@@ -9,6 +9,6 @@ namespace Kalibrator.Processors
 {
     public interface IProcessor
     {
-        void Process(List<LogFile> logFiles);
+        OutputData Process(FormData inputData, List<LogFile> logFiles);
     }
 }

@@ -7,10 +7,12 @@ using Kalibrator.Data;
 
 namespace Kalibrator.Processors
 {
-    public class MAFCalibrationProcessor : IProcessor
+    public class MafCalibrationProcessor : IProcessor
     {
-        public void Process(List<LogFile> logFiles)
+        public OutputData Process(FormData inputData, List<LogFile> logFiles)
         {
+            OutputData result = null;
+
             foreach (LogFile logFile in logFiles)
             {
                 // Give me the list of log entries sorted by maf voltage ascending
@@ -37,6 +39,8 @@ namespace Kalibrator.Processors
                 // Pull an average
                 float adjustedFlowAverage = flows.Average();
             }
+
+            return result;
         }
     }
 }

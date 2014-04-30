@@ -38,17 +38,20 @@
             this.gbAcceleratorPosition = new System.Windows.Forms.GroupBox();
             this.tbAcceleratorPosition = new System.Windows.Forms.TextBox();
             this.gbLogFile = new System.Windows.Forms.GroupBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.lbLogFiles = new System.Windows.Forms.ListBox();
             this.btnLoad = new System.Windows.Forms.Button();
             this.tbLogFilePath = new System.Windows.Forms.TextBox();
             this.btnProcess = new System.Windows.Forms.Button();
-            this.btnBrowse = new System.Windows.Forms.Button();
+            this.gbProcessingOutput = new System.Windows.Forms.GroupBox();
+            this.tbProcessingOutput = new System.Windows.Forms.TextBox();
             this.gbCurrentMAFCalibration.SuspendLayout();
             this.gbAFRTargets.SuspendLayout();
             this.gbOpenLoopTransition.SuspendLayout();
             this.gbLoad.SuspendLayout();
             this.gbAcceleratorPosition.SuspendLayout();
             this.gbLogFile.SuspendLayout();
+            this.gbProcessingOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbCurrentMAFCalibration
@@ -147,6 +150,16 @@
             this.gbLogFile.TabStop = false;
             this.gbLogFile.Text = "Log Files";
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(191, 19);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
+            this.btnBrowse.TabIndex = 4;
+            this.btnBrowse.Text = "...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // lbLogFiles
             // 
             this.lbLogFiles.FormattingEnabled = true;
@@ -176,7 +189,7 @@
             // 
             // btnProcess
             // 
-            this.btnProcess.Location = new System.Drawing.Point(12, 331);
+            this.btnProcess.Location = new System.Drawing.Point(12, 323);
             this.btnProcess.Name = "btnProcess";
             this.btnProcess.Size = new System.Drawing.Size(299, 36);
             this.btnProcess.TabIndex = 2;
@@ -184,21 +197,29 @@
             this.btnProcess.UseVisualStyleBackColor = true;
             this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
             // 
-            // btnBrowse
+            // gbProcessingOutput
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(191, 19);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(25, 23);
-            this.btnBrowse.TabIndex = 4;
-            this.btnBrowse.Text = "...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.gbProcessingOutput.Controls.Add(this.tbProcessingOutput);
+            this.gbProcessingOutput.Location = new System.Drawing.Point(12, 365);
+            this.gbProcessingOutput.Name = "gbProcessingOutput";
+            this.gbProcessingOutput.Size = new System.Drawing.Size(299, 51);
+            this.gbProcessingOutput.TabIndex = 3;
+            this.gbProcessingOutput.TabStop = false;
+            this.gbProcessingOutput.Text = "Processing Output";
+            // 
+            // tbProcessingOutput
+            // 
+            this.tbProcessingOutput.Location = new System.Drawing.Point(7, 20);
+            this.tbProcessingOutput.Name = "tbProcessingOutput";
+            this.tbProcessingOutput.Size = new System.Drawing.Size(286, 20);
+            this.tbProcessingOutput.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 379);
+            this.ClientSize = new System.Drawing.Size(323, 425);
+            this.Controls.Add(this.gbProcessingOutput);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.gbLogFile);
             this.Controls.Add(this.gbOpenLoopTransition);
@@ -220,6 +241,8 @@
             this.gbAcceleratorPosition.PerformLayout();
             this.gbLogFile.ResumeLayout(false);
             this.gbLogFile.PerformLayout();
+            this.gbProcessingOutput.ResumeLayout(false);
+            this.gbProcessingOutput.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -241,6 +264,8 @@
         private System.Windows.Forms.Button btnProcess;
         private System.Windows.Forms.ListBox lbLogFiles;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.GroupBox gbProcessingOutput;
+        private System.Windows.Forms.TextBox tbProcessingOutput;
     }
 }
 
