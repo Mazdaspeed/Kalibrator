@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.gbCurrentMAFCalibration = new System.Windows.Forms.GroupBox();
             this.tbCurrentMAFCalibration = new System.Windows.Forms.TextBox();
             this.gbAFRTargets = new System.Windows.Forms.GroupBox();
@@ -45,6 +48,7 @@
             this.btnProcess = new System.Windows.Forms.Button();
             this.gbProcessingOutput = new System.Windows.Forms.GroupBox();
             this.tbProcessingOutput = new System.Windows.Forms.TextBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbCurrentMAFCalibration.SuspendLayout();
             this.gbAFRTargets.SuspendLayout();
             this.gbOpenLoopTransition.SuspendLayout();
@@ -52,6 +56,7 @@
             this.gbAcceleratorPosition.SuspendLayout();
             this.gbLogFile.SuspendLayout();
             this.gbProcessingOutput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbCurrentMAFCalibration
@@ -71,6 +76,8 @@
             this.tbCurrentMAFCalibration.Size = new System.Drawing.Size(286, 20);
             this.tbCurrentMAFCalibration.TabIndex = 0;
             this.tbCurrentMAFCalibration.Text = "Paste Current MAF Calibration Here";
+            this.tbCurrentMAFCalibration.Click += new System.EventHandler(this.tbCurrentMAFCalibration_Click);
+            this.tbCurrentMAFCalibration.Leave += new System.EventHandler(this.tbCurrentMAFCalibration_Leave);
             // 
             // gbAFRTargets
             // 
@@ -214,11 +221,37 @@
             this.tbProcessingOutput.Size = new System.Drawing.Size(286, 20);
             this.tbProcessingOutput.TabIndex = 0;
             // 
+            // chart1
+            // 
+            chartArea1.AxisX.Maximum = 5D;
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.Title = "Maf Voltage";
+            chartArea1.AxisY.Title = "Flow (g/s)";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(317, 12);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Current";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "Calibrated";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(453, 401);
+            this.chart1.TabIndex = 4;
+            this.chart1.Text = "chart1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 425);
+            this.ClientSize = new System.Drawing.Size(782, 425);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.gbProcessingOutput);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.gbLogFile);
@@ -243,6 +276,7 @@
             this.gbLogFile.PerformLayout();
             this.gbProcessingOutput.ResumeLayout(false);
             this.gbProcessingOutput.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,6 +300,7 @@
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.GroupBox gbProcessingOutput;
         private System.Windows.Forms.TextBox tbProcessingOutput;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 

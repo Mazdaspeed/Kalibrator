@@ -7,7 +7,12 @@ namespace Kalibrator.Data.Elements
 {
     public class BaseElement<T>
     {
+
+        #region Private Members
+
         private string _rawValue = null;
+
+        #endregion
 
         #region Protected Members
 

@@ -2,16 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kalibrator.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="MafBreakpoints" Type="System.Collections.Specialized.StringCollection" Scope="Application">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;0&lt;/string&gt;
-  &lt;string&gt;1&lt;/string&gt;
-  &lt;string&gt;2&lt;/string&gt;
-  &lt;string&gt;3&lt;/string&gt;
-  &lt;string&gt;4&lt;/string&gt;
-  &lt;string&gt;5&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
+    <Setting Name="MafBreakpoints" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0.00;0.04;0.08;0.12;0.16;0.20;0.23;0.27;0.31;0.35;0.39;0.43;0.47;0.51;0.55;0.59;0.63;0.66;0.70;0.74;0.78;0.82;0.86;0.90;0.94;0.98;1.02;1.05;1.09;1.13;1.17;1.21;1.25;1.29;1.33;1.37;1.41;1.45;1.48;1.52;1.56;1.60;1.64;1.68;1.72;1.76;1.80;1.84;1.88;1.91;1.95;1.99;2.03;2.07;2.11;2.15;2.19;2.23;2.27;2.30;2.34;2.38;2.42;2.46;2.50;2.54;2.58;2.62;2.66;2.70;2.73;2.77;2.81;2.85;2.89;2.93;2.97;3.01;3.05;3.09;3.13;3.16;3.20;3.24;3.28;3.32;3.36;3.40;3.44;3.48;3.52;3.55;3.59;3.63;3.67;3.71;3.75;3.79;3.83;3.87;3.91;3.95;3.98;4.02;4.06;4.10;4.14;4.18;4.22;4.26;4.30;4.34;4.38;4.41;4.45;4.49;4.53;4.57;4.61;4.65;4.69;4.73;4.77;4.80;4.84;4.88;4.92;4.96;5.00</Value>
     </Setting>
     <Setting Name="WotAfrBreakpoints" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;

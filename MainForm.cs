@@ -65,7 +65,7 @@ namespace Kalibrator
                         tbLogFilePath.Text = fileDialog.FileName;
                     }
                 }
-            }   
+            }
         }
 
         private void btnProcess_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace Kalibrator
 
                 _logFiles.Add(newFile);
 
-                AddToList(string.Format("{0}  [Entries: {1}]",newFile.LogFilePath, newFile.LogEntryCount));
+                AddToList(string.Format("{0}  [Entries: {1}]", newFile.LogFilePath, newFile.LogEntryCount));
             }
             else
             {
@@ -115,7 +115,7 @@ namespace Kalibrator
             {
                 FormData data = GetFormData();
 
-                IProcessor processor = new MafCalibrationProcessor();                
+                IProcessor processor = new MafCalibrationProcessor();
                 OutputData outputData = processor.Process(data, _logFiles);
 
                 DisplayOutput(outputData);
@@ -139,14 +139,14 @@ namespace Kalibrator
             {
                 data.OpenLoopAPP = Convert.ToInt32(tbAcceleratorPosition.Text);
                 data.OpenLoopLoad = Convert.ToSingle(tbLoad.Text);
-                
-                System.Collections.Specialized.StringCollection mafBreakpoints = Properties.Settings.Default.MafBreakpoints;
+
+                List<string> mafBreakpoints = Properties.Settings.Default.MafBreakpoints.Split(';').ToList();
                 List<string> mafValues = tbCurrentMAFCalibration.Text.Split('\t').ToList();
 
                 // Check to make sure we have enough maf values for our breakpoints
                 if (mafBreakpoints.Count == mafValues.Count)
                 {
-                    data.MafValues = new Dictionary<float,float>();
+                    data.MafValues = new Dictionary<float, float>();
                     for (int i = 0; i < mafBreakpoints.Count; i++)
                     {
                         data.MafValues.Add(Convert.ToSingle(mafBreakpoints[i]), Convert.ToSingle(mafValues[i]));
@@ -185,7 +185,20 @@ namespace Kalibrator
             }
             else
             {
-                tbProcessingOutput.Text = data.GetDisplayedOutput();
+                if (data != null)
+                {
+                    tbProcessingOutput.Text = data.GetDisplayedOutput();
+                    chart1.Series[1].Points.Clear();
+                    if (data is MafCalibration)
+                    {
+                        Dictionary<float, float> mafValues = ((MafCalibration)data).MafValues;
+
+                        foreach (var mafValue in mafValues)
+                        {
+                            chart1.Series[1].Points.AddXY(mafValue.Key, mafValue.Value);
+                        }
+                    }
+                }
             }
         }
 
@@ -238,6 +251,36 @@ namespace Kalibrator
                 gbProcessingOutput.Enabled = false;
                 btnProcess.Enabled = false;
                 Application.DoEvents();
+            }
+        }
+
+        private void tbCurrentMAFCalibration_Click(object sender, EventArgs e)
+        {
+            if (tbCurrentMAFCalibration.Text == Properties.Resources.tbCurrentMAFCalibration_InstructionText)
+            {
+                tbCurrentMAFCalibration.Text = string.Empty;
+            }
+        }
+
+        private void tbCurrentMAFCalibration_Leave(object sender, EventArgs e)
+        {
+            if (tbCurrentMAFCalibration.Text == string.Empty)
+            {
+                tbCurrentMAFCalibration.Text = Properties.Resources.tbCurrentMAFCalibration_InstructionText;
+            }
+            else
+            {
+                List<string> mafBreakpoints = Properties.Settings.Default.MafBreakpoints.Split(';').ToList();
+                List<string> mafValues = tbCurrentMAFCalibration.Text.Split('\t').ToList();
+
+                // Check to make sure we have enough maf values for our breakpoints
+                if (mafBreakpoints.Count == mafValues.Count)
+                {
+                    for (int i = 0; i < mafBreakpoints.Count; i++)
+                    {
+                        chart1.Series[0].Points.AddXY(Convert.ToSingle(mafBreakpoints[i]), Convert.ToSingle(mafValues[i]));
+                    }
+                }
             }
         }
 
