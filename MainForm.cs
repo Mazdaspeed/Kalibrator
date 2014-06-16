@@ -28,6 +28,8 @@ namespace Kalibrator
         public MainForm()
         {
             InitializeComponent();
+            tbCurrentMAFCalibration.Text = Properties.Resources.tbCurrentMAFCalibration_InstructionText;
+            tbAFRTargets.Text = Properties.Resources.tbAFRTarget_InstructionText;
         }
 
         #endregion
@@ -114,6 +116,11 @@ namespace Kalibrator
             if (_logFiles != null)
             {
                 FormData data = GetFormData();
+                if (data == null)
+                {
+                    EnableForm();
+                    return;
+                }
 
                 IProcessor processor = new MafCalibrationProcessor();
                 OutputData outputData = processor.Process(data, _logFiles);
@@ -139,6 +146,7 @@ namespace Kalibrator
             {
                 data.OpenLoopAPP = Convert.ToInt32(tbAcceleratorPosition.Text);
                 data.OpenLoopLoad = Convert.ToSingle(tbLoad.Text);
+                data.WotAFRTarget = Convert.ToSingle(tbAFRTargets.Text);
 
                 List<string> mafBreakpoints = Properties.Settings.Default.MafBreakpoints.Split(';').ToList();
                 List<string> mafValues = tbCurrentMAFCalibration.Text.Split('\t').ToList();
@@ -153,23 +161,24 @@ namespace Kalibrator
                     }
                 }
 
-                System.Collections.Specialized.StringCollection wotAfrBreakpoints = Properties.Settings.Default.WotAfrBreakpoints;
-                List<string> wotAfrValues = tbAFRTargets.Text.Split('\t').ToList();
+                //System.Collections.Specialized.StringCollection wotAfrBreakpoints = Properties.Settings.Default.WotAfrBreakpoints;
+                //List<string> wotAfrValues = tbAFRTargets.Text.Split('\t').ToList();
 
-                // Check to make sure we have enough wot afr values for our breakpoints
-                if (wotAfrBreakpoints.Count == wotAfrValues.Count)
-                {
-                    data.WotAFRValues = new Dictionary<float, float>();
-                    for (int i = 0; i < wotAfrBreakpoints.Count; i++)
-                    {
-                        data.WotAFRValues.Add(Convert.ToSingle(wotAfrBreakpoints[i]), Convert.ToSingle(wotAfrValues[i]));
-                    }
-                }
+                //// Check to make sure we have enough wot afr values for our breakpoints
+                //if (wotAfrBreakpoints.Count == wotAfrValues.Count)
+                //{
+                //    data.WotAFRValues = new Dictionary<float, float>();
+                //    for (int i = 0; i < wotAfrBreakpoints.Count; i++)
+                //    {
+                //        data.WotAFRValues.Add(Convert.ToSingle(wotAfrBreakpoints[i]), Convert.ToSingle(wotAfrValues[i]));
+                //    }
+                //}
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
                 data = null;
+                MessageBox.Show("Input values incorrect", "Form Data", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
 
             return data;
@@ -262,6 +271,14 @@ namespace Kalibrator
             }
         }
 
+        private void tbAFRTargets_Click(object sender, EventArgs e)
+        {
+            if (tbAFRTargets.Text == Properties.Resources.tbAFRTarget_InstructionText)
+            {
+                tbAFRTargets.Text = string.Empty;
+            }
+        }
+
         private void tbCurrentMAFCalibration_Leave(object sender, EventArgs e)
         {
             if (tbCurrentMAFCalibration.Text == string.Empty)
@@ -281,6 +298,14 @@ namespace Kalibrator
                         chart1.Series[0].Points.AddXY(Convert.ToSingle(mafBreakpoints[i]), Convert.ToSingle(mafValues[i]));
                     }
                 }
+            }
+        }
+
+        private void tbAFRTargets_Leave(object sender, EventArgs e)
+        {
+            if (tbAFRTargets.Text == string.Empty)
+            {
+                tbAFRTargets.Text = Properties.Resources.tbAFRTarget_InstructionText;
             }
         }
 

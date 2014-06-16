@@ -11,7 +11,9 @@ namespace Kalibrator.Data
 
         private Dictionary<float, float> _mafValues = null;
 
-        private Dictionary<float, float> _wotAFRValues = null;        
+        private Dictionary<float, float> _wotAFRValues = null;
+
+        private float? _wotAFRTarget = null;
 
         private int? _openLoopAPP = null;
         
@@ -30,6 +32,11 @@ namespace Kalibrator.Data
         {
             get { return _wotAFRValues; }
             set { _wotAFRValues = value; }
+        }
+        public float? WotAFRTarget
+        {
+            get { return _wotAFRTarget; }
+            set { _wotAFRTarget = value; }
         }
         public int? OpenLoopAPP
         {

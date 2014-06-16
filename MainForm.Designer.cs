@@ -87,7 +87,7 @@
             this.gbAFRTargets.Size = new System.Drawing.Size(299, 51);
             this.gbAFRTargets.TabIndex = 1;
             this.gbAFRTargets.TabStop = false;
-            this.gbAFRTargets.Text = "WOT AFR Targets";
+            this.gbAFRTargets.Text = "WOT AFR Target";
             // 
             // tbAFRTargets
             // 
@@ -95,7 +95,9 @@
             this.tbAFRTargets.Name = "tbAFRTargets";
             this.tbAFRTargets.Size = new System.Drawing.Size(286, 20);
             this.tbAFRTargets.TabIndex = 0;
-            this.tbAFRTargets.Text = "Paste Current WOT AFR Targets Here";
+            this.tbAFRTargets.Text = "Put Current WOT AFR Target Here";
+            this.tbAFRTargets.Click += new System.EventHandler(this.tbAFRTargets_Click);
+            this.tbAFRTargets.Leave += new System.EventHandler(this.tbAFRTargets_Leave);
             // 
             // gbOpenLoopTransition
             // 
@@ -142,7 +144,7 @@
             this.tbAcceleratorPosition.Name = "tbAcceleratorPosition";
             this.tbAcceleratorPosition.Size = new System.Drawing.Size(103, 20);
             this.tbAcceleratorPosition.TabIndex = 0;
-            this.tbAcceleratorPosition.Text = "100";
+            this.tbAcceleratorPosition.Text = "95";
             // 
             // gbLogFile
             // 

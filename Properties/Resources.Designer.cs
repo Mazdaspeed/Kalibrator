@@ -61,6 +61,15 @@ namespace Kalibrator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Put Current WOT AFR Target Here.
+        /// </summary>
+        internal static string tbAFRTarget_InstructionText {
+            get {
+                return ResourceManager.GetString("tbAFRTarget_InstructionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paste Current MAF Calibration Here.
         /// </summary>
         internal static string tbCurrentMAFCalibration_InstructionText {
